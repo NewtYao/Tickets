@@ -16,6 +16,3 @@ class Profile(models.Model):
     def __str__(self) -> str:
         return (f"{self.name}")
     
-class Ticket(models.Model):
-    pass
-    
