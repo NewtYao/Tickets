@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from.models import Profile
+from .models import Tickets
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(
@@ -10,13 +10,6 @@ class SignUpForm(UserCreationForm):
                                 'class': 'form-control',
                                 'placeholder': 'Email Address'
                             }))
-    # name = forms.CharField(
-    #                         label="",
-    #                         max_length='20',
-    #                         widget=forms.TimeInput(attrs={
-    #                             'class': 'form-control',
-    #                             'placeholder': 'Name' 
-    #                         }))
     SKI_EXPERIENCE={
         "FT": "First Time",
         "GZ": "Green Zone",
@@ -27,7 +20,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'level', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'level')
 
 
 
@@ -47,3 +40,34 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['placeholder'] = 'E-mail'
+        self.fields['email'].label = ''
+
+        self.fields['level'].widget.attrs['class'] = 'form-control'
+        self.fields['level'].widget.attrs['placeholder'] = 'Level'
+        self.fields['level'].label = ''
+
+
+class CreateTicket(forms.ModelForm):
+    class Meta:
+        model = Tickets
+        fields = ('facility', 'price', 'quantity', )
+        # exclude=('seller',)
+
+    def __init__(self, *args, **kwargs):
+        super(CreateTicket, self).__init__(*args, **kwargs)
+        self.fields['price'].widget.attrs['class'] = 'form-control'
+        self.fields['price'].widget.attrs['placeholder'] = 'Price'
+        self.fields['price'].label = ''
+
+        self.fields['quantity'].widget.attrs['class'] = 'form-control'
+        self.fields['quantity'].widget.attrs['placeholder'] = 'Quantity'
+        self.fields['quantity'].label = ''
+
+        self.fields['facility'].widget.attrs['class'] = 'form-control'
+        self.fields['facility'].widget.attrs['placeholder'] = 'Facility'
+        self.fields['facility'].label = ''
+
+        # self.fields['seller'].widget.attrs['class'] = 'form-control'
