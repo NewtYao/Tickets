@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="col-md-6 offset-md-3">
+
+    <h1>Tickets</h1>
+    <br/>
+    <!-- <form method="POST" action=""> -->
+        {% csrf_token %}
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'facility_images/神立_sGK9LIU.JPG' %}" alt="" class="card-img-top" alt="...">
+            <div class="card-body">
+              <a href="{% url 'buy_ticket' 'F1'%}" class="btn btn-primary">神立</a>
+            </div>
+        </div>
+        <br/>
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'facility_images/石打丸山.JPG' %}" alt="" class="card-img-top" alt="...">
+            <div class="card-body">
+              <a href="{% url 'buy_ticket' 'F2'%}" class="btn btn-primary">石打丸山</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'facility_images/舞子.JPG' %}" alt="" class="card-img-top" alt="...">
+            <div class="card-body">
+              <a href="{% url 'buy_ticket' 'F3'%}" class="btn btn-primary">舞子</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'facility_images/苗場.JPG' %}" alt="" class="card-img-top" alt="...">
+            <div class="card-body">
+              <a href="{% url 'buy_ticket' 'F4'%}" class="btn btn-primary">苗場</a>
+            </div>
+        </div>
+    </div>
+
+        <!-- <div class="card-header">
+            <h1>Available Tickets</h1>
+
+            {% if tickets_all %}
+                <ul>
+                {% for ticket in tickets_all %}
+                    <li>
+                        {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }})
+                        </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tickets available at this time.</p>
+            {% endif %}
+
+        </div> -->
+        <!-- <button type="submit" class="btn btn-secondary">Create</button> -->
+    </form>
+
+</div>
+
+{% endblock %}

@@ -57,6 +57,7 @@ def create_ticket(request):
             if ticket.is_valid():
                 create_ticket = ticket.save(commit=False)
                 create_ticket.seller = request.user
+                # create_ticket.facility 
                 create_ticket.save()
                 messages.success(request, "Ticket Created Successfully !")
                 return redirect('create_ticket')
@@ -97,5 +98,18 @@ def update_ticket(request, pk):
     else:
         messages.success(request, "You Have To Login First!")
         return redirect('home')
-        
 
+def facility(request):
+    if request.user.is_authenticated:
+        return render(request, 'facility.html', {})
+    else:
+        messages.success(request, "You Must Be Logged In To View That Page !")
+        return redirect('home')
+
+def buy_ticket(request, f):
+    if request.user.is_authenticated:
+        tickets_all = Tickets.objects.filter(facility=f).order_by('price')
+        return render(request, 'buy_ticket.html', {'tickets_all':tickets_all})
+    else:
+        messages.success(request, "You Must Be Logged In To View That Page !")
+        return redirect('home')

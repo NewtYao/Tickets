@@ -13,11 +13,20 @@
             <a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'my_tickets' user.id%}">My Tickets</a>
+            <a class="nav-link" href="{% url 'facility'%}">Buy Tickets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'create_ticket'%}">Sell Tickets</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'my_tickets' user.id%}">My Tickets</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+        
+        </ul>
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
@@ -29,9 +38,6 @@
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
 
           {% else %}
 
