@@ -5,9 +5,7 @@ from .form import SignUpForm, CreateTicket
 from .models import Tickets
 
 
-# Create your views here.
 def home(request):
-    # tickets = Tickets.objects.all()
     #check login or not
     if request.method == "POST":
         username = request.POST['username']
@@ -25,7 +23,7 @@ def home(request):
         return render(request, 'home.html', {})
 
 # def login_user(request):
-#     pass
+#     combine with views.home
 
 def logout_user(request):
     logout(request)
