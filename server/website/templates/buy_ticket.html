@@ -15,7 +15,7 @@
                 <ul>
                 {% for ticket in tickets_all %}
                     <li>
-                        {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }})
+                        {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }}) (status:{{ ticket.status}}) {% include 'chat/partials/chat_bubble.html' %}
                         </li>
                 {% endfor %}
                 </ul>
@@ -24,9 +24,9 @@
             {% endif %}
 
         </div>
-        <!-- <button type="submit" class="btn btn-secondary">Create</button> -->
     </form>
-
+    <!-- {% include 'chat/partials/chat_bubble.html' %} -->
 </div>
+
 
 {% endblock %}

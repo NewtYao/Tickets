@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'chat',
     'channels',
+    "heroicons",
 ]
 
 AUTHENTICATION_BACKENDS =[
@@ -93,6 +94,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'django.template.context_processors.request',
+            ],
+            'builtins':[
+                "heroicons.templatetags.heroicons",
             ],
         },
     },

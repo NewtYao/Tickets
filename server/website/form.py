@@ -53,7 +53,7 @@ class SignUpForm(UserCreationForm):
 class CreateTicket(forms.ModelForm):
     class Meta:
         model = Tickets
-        fields = ('facility', 'price', 'quantity', )
+        fields = ('facility', 'price', 'quantity', 'status')
         # exclude=('seller',)
 
     def __init__(self, *args, **kwargs):
@@ -69,5 +69,9 @@ class CreateTicket(forms.ModelForm):
         self.fields['facility'].widget.attrs['class'] = 'form-control'
         self.fields['facility'].widget.attrs['placeholder'] = 'Facility'
         self.fields['facility'].label = ''
+
+        self.fields['status'].widget.attrs['class'] = 'form-control'
+        self.fields['status'].widget.attrs['placeholder'] = 'status'
+        self.fields['status'].label = ''
 
         # self.fields['seller'].widget.attrs['class'] = 'form-control'

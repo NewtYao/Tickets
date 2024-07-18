@@ -18,6 +18,11 @@ class Tickets(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=0)
     quantity = models.CharField(max_length=15)
 
+    status = models.CharField(max_length=20, choices=(
+        ('Open', 'Open'),
+        ('In Progress', 'In Progress'),
+    ), default='Open')
+
     def __str__(self) -> str:
         return self.facility
     
