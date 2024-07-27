@@ -21,6 +21,7 @@ def chat_room(request, room_name):
     if request.method == "POST":
         form = ChatMessageCreateForm(request.POST)
         if form.is_valid():
+            print('check views')
             message = form.save(commit=False)
             message.author = request.user
             message.chatroom = chat_room_curr
