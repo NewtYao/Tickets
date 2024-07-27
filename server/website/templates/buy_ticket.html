@@ -15,7 +15,10 @@
                 <ul>
                 {% for ticket in tickets_all %}
                     <li>
-                        {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }}) (status:{{ ticket.status}}) {% include 'chat/partials/chat_bubble.html' %}
+                        {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }}) (status:{{ ticket.status}})
+                        <div class="card-body">
+                            <a href="{% url 'chat:chat_room' ticket.id%}" class="btn btn-primary">Contact</a>
+                        </div>
                         </li>
                 {% endfor %}
                 </ul>
@@ -25,7 +28,6 @@
 
         </div>
     </form>
-    <!-- {% include 'chat/partials/chat_bubble.html' %} -->
 </div>
 
 
