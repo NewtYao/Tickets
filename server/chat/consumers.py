@@ -1,5 +1,8 @@
 import json
 
+from .models import Message, Room
+from .views import chat_room
+from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 
@@ -28,18 +31,46 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json["message"]
         print(message)
         print('receive from websocket')
+        user = self.scope['user']
+        print(user)
+        chatroom = await sync_to_async(Room.objects.get)(room_name_id=self.room_name)
+        async def save_message(message, user, chatroom):
+            new_message = await sync_to_async (Message.objects.create)(
+                content=message,
+                author=user,
+                chatroom=chatroom,)
+
+            message_data = {
+                'message': new_message.content,
+                'author': new_message.author.username
+            }
+            return message_data 
+            # return new_message
+        new_message = await save_message(message, user, chatroom)
+        print(new_message)
+
         
 
         # Send message to room group
         await self.channel_layer.group_send(
-            self.room_group_name, {"type": "chat.message", "message": message}
+            self.room_group_name,
+            {
+                'type': 'chat.message',
+                'message': new_message  # Send the entire message object
+            }
         )
+            # 'type': 'chat.message',
+            # 'message': new_message.content,
+            # 'message': new_message.message,
+            # 'author': new_message.author}
+            # 'author': new_message.author.username}
         print('send to room')
 
     # Receive message from room group
     async def chat_message(self, event):
         message = event["message"]
-        print('receive message from room')
+        # author_name = event.get("author")
+        print(message)
 
 
         # Send message to WebSocket

@@ -28,19 +28,23 @@
             + '/'
         );
 
-        chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const chatLog = document.querySelector('#chat-log');
+        chatSocket.onmessage = async function(e) {
+            const data = JSON.parse(e.data);
+            const chatLog = document.querySelector('#chat-log');
+            console.log('Received data:', data);
+            await new Promise(resolve => setTimeout(resolve, 50));
+            const author = data.message['author'];
 
-        // Create a new element for the message
-        const newMessage = document.createElement('div');
-        newMessage.textContent = data.message;
+            // Create a new element for the message
+            const newMessage = document.createElement('div');
+            newMessage.textContent = `${author}: ${data.message['message']}\n`;      
 
-        // Append the new message element to the chat log
-        chatLog.appendChild(newMessage);
+            // Append the new message element to the chat log
+            // chatLog.appendChild(newMessage.textContent);
+            chatLog.textContent += newMessage.textContent ;
 
-        // Scroll to the bottom of the chat log
-        chatLog.scrollTop = chatLog.scrollHeight;
+            // Scroll to the bottom of the chat log
+            chatLog.scrollTop = chatLog.scrollHeight;
         };
 
         chatSocket.onclose = function(e) {
