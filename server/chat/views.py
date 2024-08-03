@@ -8,13 +8,18 @@ from django.views.decorators.http import require_POST
 
 from .models import *
 from .forms import *
+from website.models import Tickets
 
 # chat/views.py
 
 
 @login_required
-def chat_room(request, room_name):
-    chat_room_curr = get_object_or_404(Room, room_name_id=room_name)
+def chat_room(request, room_name, ticket_seller):
+    try:
+        chat_room_curr = get_object_or_404(Room, room_name_id=room_name, ticket_seller_id=ticket_seller)
+    except:
+        chat_room_curr = Room.objects.create(room_name_id=room_name, ticket_seller_id=ticket_seller)
+    
     chat_message_curr = chat_room_curr.chat_message.all()[:30]
     form = ChatMessageCreateForm()
     print('pass through')
@@ -29,4 +34,4 @@ def chat_room(request, room_name):
     #         message.save()
     #         return redirect('chat:chat_room', room_name=room_name)
 
-    return render(request, "chat/chat_room.html", {'chat_message_curr' : chat_message_curr, 'form' : form, 'room_name': room_name})
+    return render(request, "chat/chat_room.html", {'chat_message_curr' : chat_message_curr, 'form' : form, 'room_name': room_name, 'ticket_seller':ticket_seller})

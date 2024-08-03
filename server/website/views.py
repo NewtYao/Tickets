@@ -106,8 +106,9 @@ def facility(request):
 
 def buy_ticket(request, f):
     if request.user.is_authenticated:
+        buyer = request.user.id
         tickets_all = Tickets.objects.filter(facility=f).order_by('price')
-        return render(request, 'buy_ticket.html', {'tickets_all':tickets_all})
+        return render(request, 'buy_ticket.html', {'tickets_all':tickets_all, 'buyer':buyer})
     else:
         messages.success(request, "You Must Be Logged In To View That Page !")
         return redirect('home')

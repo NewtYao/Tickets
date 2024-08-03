@@ -8,7 +8,9 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        print('check try connect')
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
+        self.ticket_seller = self.scope["url_route"]["kwargs"]["ticket_seller"]
         self.room_group_name = f"chat_{self.room_name}"
         print('check connect room')
         print(self.room_group_name)
