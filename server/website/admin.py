@@ -5,4 +5,3 @@ from .models import Tickets, Facilities
 
 admin.site.register(Tickets)
 admin.site.register(Facilities)
-# admin.site.register(Profile)

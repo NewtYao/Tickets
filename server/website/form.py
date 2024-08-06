@@ -54,7 +54,6 @@ class CreateTicket(forms.ModelForm):
     class Meta:
         model = Tickets
         fields = ('facility', 'price', 'quantity', 'status')
-        # exclude=('seller',)
 
     def __init__(self, *args, **kwargs):
         super(CreateTicket, self).__init__(*args, **kwargs)
@@ -74,4 +73,3 @@ class CreateTicket(forms.ModelForm):
         self.fields['status'].widget.attrs['placeholder'] = 'status'
         self.fields['status'].label = ''
 
-        # self.fields['seller'].widget.attrs['class'] = 'form-control'
