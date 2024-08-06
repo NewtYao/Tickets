@@ -41,11 +41,22 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(user.id)
         print(self.ticket_seller)
         print(self.room_name)
-        chatroom = await sync_to_async(Room.objects.get)(
-            room_name_id=self.room_name,
-            ticket_seller_id=self.ticket_seller,
-            buyer_id=user,
+        print(self.ticket_seller == user)
+        if int(self.ticket_seller) == int(user.id):
+            print("check if")
+            buyer_name=self.scope["url_route"]["kwargs"]["buyer"]
+            chatroom = await sync_to_async(Room.objects.get)(
+                room_name_id=self.room_name,
+                ticket_seller_id=self.ticket_seller,
+                buyer_id = buyer_name,
             )
+        else:
+            print('check else')
+            chatroom = await sync_to_async(Room.objects.get)(
+                room_name_id=self.room_name,
+                ticket_seller_id=self.ticket_seller,
+                buyer_id=user,
+                )
         print('chatroom pass')
         async def save_message(message, user, chatroom):
             print('start save message')
