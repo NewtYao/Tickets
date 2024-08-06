@@ -7,6 +7,7 @@ from website.models import Tickets
 class Room(models.Model):
     room_name = models.ForeignKey(Tickets, related_name='ticket_chat', on_delete=models.CASCADE)
     ticket_seller = models.ForeignKey(User, related_name='room_seller', on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User, related_name='room_buyer', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.room_name

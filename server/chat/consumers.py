@@ -11,10 +11,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print('check try connect')
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.ticket_seller = self.scope["url_route"]["kwargs"]["ticket_seller"]
+        self.buyer = self.scope["url_route"]["kwargs"]["buyer"]
         self.room_group_name = f"chat_{self.room_name}"
         print('check connect room')
         print(self.room_group_name)
         print(self.room_name)
+        print(self.buyer)
+        print(self.ticket_seller)
 
         # Join room group
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
@@ -35,13 +38,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print('receive from websocket')
         user = self.scope['user']
         print(user)
-        chatroom = await sync_to_async(Room.objects.get)(room_name_id=self.room_name)
+        print(user.id)
+        print(self.ticket_seller)
+        print(self.room_name)
+        chatroom = await sync_to_async(Room.objects.get)(
+            room_name_id=self.room_name,
+            ticket_seller_id=self.ticket_seller,
+            buyer_id=user,
+            )
+        print('chatroom pass')
         async def save_message(message, user, chatroom):
+            print('start save message')
+            print(message)
+            print(user)
+            # print(chatroom)
             new_message = await sync_to_async (Message.objects.create)(
                 content=message,
                 author=user,
                 chatroom=chatroom,)
-
+            print('check new message')
             message_data = {
                 'message': new_message.content,
                 'author': new_message.author.username

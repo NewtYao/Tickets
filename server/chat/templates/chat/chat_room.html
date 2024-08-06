@@ -16,12 +16,16 @@
     </form>
     {{ room_name|json_script:"room-name" }}
     {{ ticket_seller|json_script:"ticket-seller" }}
+    {{ buyer|json_script:"buyer" }}
 
 
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
         const ticketSeller = JSON.parse(document.getElementById('ticket-seller').textContent);
+        const buyer = JSON.parse(document.getElementById('buyer').textContent);
+        console.log(roomName)
         console.log(ticketSeller)
+        console.log(buyer)
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -30,7 +34,10 @@
             + '/'
             + ticketSeller
             + '/'
+            + buyer
+            + '/'
         );
+        console.log(chatSocket)
 
         chatSocket.onmessage = async function(e) {
             const data = JSON.parse(e.data);

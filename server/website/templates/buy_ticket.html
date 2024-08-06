@@ -17,7 +17,7 @@
                     <li>
                         {{ ticket.facility }} - {{ ticket.price }} (Quantity: {{ ticket.quantity }}) (status:{{ ticket.status}})
                         <div class="card-body">
-                            <a href="{% url 'chat:chat_room' ticket.id ticket.seller_id %}" class="btn btn-primary">Contact</a>
+                            <a href="{% url 'chat:chat_room' ticket.id ticket.seller_id buyer.id %}" class="btn btn-primary">Contact</a>
                         </div>
                         </li>
                 {% endfor %}
