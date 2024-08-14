@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+    <h1>My Chatroom</h1>
+    <br/>
+    <!-- <form method="POST" action=""> -->
+        {% csrf_token %}
+        <div class="card-header">
+
+            {% if user.is_authenticated %}
+            {% for sell in selling %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ sell.buyer.username }}
+                </div>
+            <div class="card-body">
+                <p>{{ sell.room_name.get_facility_display  }}
+                    <a href="{% url 'chat:chat_room' sell.room_name_id sell.ticket_seller_id sell.buyer_id%}" class="btn btn-primary">Enter</a>
+                </p>
+            </div>
+            </div>
+            {% endfor %}
+
+            {% for buy in buying %}
+            <div class="card mb-3">  <div class="card-header">
+                {{ buy.ticket_seller.username }}
+            </div>
+            <div class="card-body">
+                <p>{{ buy.room_name.get_facility_display  }}
+                    <a href="{% url 'chat:chat_room' buy.room_name_id buy.ticket_seller_id buy.buyer_id%}" class="btn btn-primary">Enter</a>
+                </p>
+            </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+                <p>You don't have any chatroom yet.</p>
+            {% endif %}
+
+        </div>
+    
+    </form>
+</div>
+
+{% endblock %}

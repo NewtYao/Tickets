@@ -23,3 +23,10 @@ def chat_room(request, room_name, ticket_seller, buyer):
     form = ChatMessageCreateForm()
 
     return render(request, "chat/chat_room.html", {'chat_message_curr' : chat_message_curr, 'form' : form, 'room_name': room_name, 'ticket_seller':ticket_seller, 'buyer':buyer})
+
+@login_required
+def chat_list(request):
+    user_id = request.user.id
+    sell_chatroom_lists = Room.objects.filter(ticket_seller_id=user_id).prefetch_related('room_buyer')
+    buy_chatroom_lists = Room.objects.filter(buyer_id=user_id)
+    return render(request, "chat/chat_list.html", {'selling':sell_chatroom_lists, 'buying':buy_chatroom_lists})
