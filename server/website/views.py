@@ -4,6 +4,9 @@ from django.contrib import messages
 from .form import SignUpForm, CreateTicket
 from .models import Tickets
 
+# from bs4 import BeautifulSoup
+# import requests
+
 
 def home(request):
     #check login or not
@@ -21,6 +24,7 @@ def home(request):
             return redirect('home')
     else:
         return render(request, 'home.html', {})
+
 
 # def login_user(request):
 #     combine with views.home

@@ -27,6 +27,6 @@ def chat_room(request, room_name, ticket_seller, buyer):
 @login_required
 def chat_list(request):
     user_id = request.user.id
-    sell_chatroom_lists = Room.objects.filter(ticket_seller_id=user_id).prefetch_related('room_buyer')
+    sell_chatroom_lists = Room.objects.filter(ticket_seller_id=user_id).prefetch_related('buyer')
     buy_chatroom_lists = Room.objects.filter(buyer_id=user_id)
     return render(request, "chat/chat_list.html", {'selling':sell_chatroom_lists, 'buying':buy_chatroom_lists})

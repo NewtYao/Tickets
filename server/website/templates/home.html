@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
-
 {% block content%}
 
 <div class="col-md-6 offset-md-3">
@@ -10,35 +9,27 @@
 <a class="btn btn-secondary btn-lg" href="{% url 'facility'%}" role="button">Buy Tickets</a>
 <a class="btn btn-secondary btn-lg" href="{% url 'create_ticket'%}" role="button">Sell Tickets</a>
 
-
 {% else %}
 
 <h1>Login</h1>
 <br/>
 <form method="POST" action="{% url 'home' %}">
     {% csrf_token %}
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username", placeholder="Username" required>
+  </div><br/>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password", placeholder="Password" required>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">login</button>
+  <br/>
+  <br/>
+  <a type="button" class="btn btn-primary" href="{% provider_login_url 'facebook' method='oauth2' %}">Login with Facebook</a>
 
-    <!-- <form> -->
-        <div class="mb-3">
-          <input type="text" class="form-control" name="username", placeholder="Username" required>
-        </div><br/>
-        <div class="mb-3">
-          <input type="password" class="form-control" name="password", placeholder="Password" required>
-        </div>
-        <br/>
-        <button type="submit" class="btn btn-secondary">login</button>
-        <br/>
-        <br/>
-        <a type="button" class="btn btn-primary" href="{% provider_login_url 'facebook' method='oauth2' %}">Login with Facebook</a>
-        <!-- <button type="button" class="btn btn-primary"></button> -->
-
-        
-      <!-- </form> -->
 
 </form>
-
 </div>
 
 {% endif %}
-
 {% endblock %}
