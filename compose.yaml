@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: Tickets
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tragef5072
+    networks:
+      - mynetwork
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: Tickets
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tragef5072
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  postgres_data:

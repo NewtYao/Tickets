@@ -1,0 +1,9 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=tragef5072
+ENV POSTGRES_DB=Tickets
+
+COPY init-user.sql /docker-entrypoint-initdb.d/
+
+CMD ["postgres", "-c", "listen_addresses='*'", "-c", "unix_socket_directories='/var/run/postgresql'"]
