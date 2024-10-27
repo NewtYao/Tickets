@@ -9,7 +9,12 @@ services:
       POSTGRES_PASSWORD: tragef5072
     networks:
       - mynetwork
-
+  redis:
+    image: redis:latest
+    # ports:
+    #   - "6379:6379"
+    networks:
+      - mynetwork
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
