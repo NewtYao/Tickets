@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from mongoengine import connect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +50,9 @@ INSTALLED_APPS = [
     'channels',
     "heroicons",
     "django_htmx",
+    # "mongoengine.django",
+    "mongoengine",
+    # "mongoengine.django.mongo_auth",
 ]
 
 AUTHENTICATION_BACKENDS =[
@@ -134,6 +138,21 @@ DATABASES = {
         'PORT': '5432'  
     }
 }
+
+# MONGO_DB_NAME = os.getenv('MONGO_INITDB_DATABASE', 'mongo')
+# MONGO_USER = os.getenv('MONGO_INITDB_ROOT_USERNAME', 'chatting')
+# MONGO_PASS = os.getenv('MONGO_INITDB_ROOT_PASSWORD', 'tragef5072')
+
+connect(
+    db="mongo",
+    username="chatting",
+    password="tragef5072",
+    # host="mongodb://mongo:27017/mongo",
+    host='mongo',
+    port=27017,
+    authentication_source='admin'
+)
+
 
 
 # Password validation

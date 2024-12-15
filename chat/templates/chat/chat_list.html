@@ -17,7 +17,7 @@
                 </div>
             <div class="card-body">
                 <p>{{ sell.room_name.get_facility_display  }}
-                    <a href="{% url 'chat:chat_room' sell.room_name_id sell.ticket_seller_id sell.buyer_id%}" class="btn btn-primary">Enter</a>
+                    <a href="{% url 'chat:chat_room' sell.room_name sell.ticket_seller.id sell.buyer.id%}" class="btn btn-primary">Enter</a>
                 </p>
             </div>
             </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="card-body">
                 <p>{{ buy.room_name.get_facility_display  }}
-                    <a href="{% url 'chat:chat_room' buy.room_name_id buy.ticket_seller_id buy.buyer_id%}" class="btn btn-primary">Enter</a>
+                    <a href="{% url 'chat:chat_room' buy.room_name buy.ticket_seller.id buy.buyer.id%}" class="btn btn-primary">Enter</a>
                 </p>
             </div>
             </div>

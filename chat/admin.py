@@ -3,6 +3,6 @@ from .models import *
 
 # Register models.
 
-admin.site.register(Room)
-admin.site.register(Message)
+# admin.site.register(Room)
+# admin.site.register(Message)
 

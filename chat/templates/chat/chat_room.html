@@ -5,14 +5,24 @@
     <title>Chat Room</title>
 </head>
 <body>
-    <textarea id="chat-log"  cols="100" rows="20">
+    <!-- <textarea id="chat-log"  cols="100" rows="20"> -->
+    <div id="chat-log" style="width: 70%; height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
         {% for message in chat_message_curr reversed %}
-        {{message.author}} : {{ message.content }}
+        <!-- <p style="margin: 5px 0;">{{message.author}} : {{ message.content }}</p> -->
+            {% if message.author == request.user.username %}
+                <div style="text-align: right; margin: 5px 0">{{ message.author }}: {{ message.content }}</div>
+            {% else %}
+                <div style="text-align: left; margin: 5px 0">{{ message.author }}: {{ message.content }}</div>
+            {% endif %}
         {% endfor %}
-    </textarea><br>
+    </div>
+    <!-- </textarea> -->
+    <br>
     <form id="chat-message-input" method="POST" class="w-full">
         {% csrf_token %}
-        {{ form }}
+        <input type="text" id="id_content" placeholder="Type your message here..." style="width: 70%;">
+        <button type="submit">Send</button>
+        <!-- {{ form }} -->
     </form>
     {{ room_name|json_script:"room-name" }}
     {{ ticket_seller|json_script:"ticket-seller" }}
@@ -44,15 +54,30 @@
             const chatLog = document.querySelector('#chat-log');
             console.log('Received data:', data);
             await new Promise(resolve => setTimeout(resolve, 50));
-            const author = data.message['author'];
+            // const author = data.message['author'];
+            const author = data.author
+            const message = data.message
 
             // Create a new element for the message
             const newMessage = document.createElement('div');
-            newMessage.textContent = `${author}: ${data.message['message']}\n`;      
+            const isSent = author === "{{ request.user.username}}";
+            // newMessage.textContent = `${author}: ${data.message['message']}\n`;
+
+            newMessage.className = isSent ? 'message sent' : 'message received';
+            newMessage.textContent = `${author}: ${message}`;
+            // newMessage.style.margin = "5px 0";
+            // newMessage.textContent = `${author}: ${message}\n`;        
 
             // Append the new message element to the chat log
             // chatLog.appendChild(newMessage.textContent);
-            chatLog.textContent += newMessage.textContent ;
+
+            if (isSent) {
+                newMessage.style.textAlign = "right"; // Align to the right for sent messages
+            } else {
+                newMessage.style.textAlign = "left"; // Align to the left for received messages
+            }
+            chatLog.appendChild(newMessage);
+            // chatLog.textContent += newMessage.textContent ;
 
             // Scroll to the bottom of the chat log
             chatLog.scrollTop = chatLog.scrollHeight;
@@ -81,6 +106,11 @@
         }));
 
         messageInputDom.value = '';
+        };
+
+        window.onload = function () {
+            const chatLog = document.querySelector('#chat-log');
+            chatLog.scrollTop = chatLog.scrollHeight;
         };
 
     </script>

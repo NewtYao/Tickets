@@ -15,6 +15,16 @@ services:
     #   - "6379:6379"
     networks:
       - mynetwork
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: chatting
+      MONGO_INITDB_ROOT_PASSWORD: tragef5072
+      MONGO_INITDB_DATABASE: mongo
+    networks:
+      - mynetwork 
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -24,6 +34,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - mongo
     environment:
       POSTGRES_DB: Tickets
       POSTGRES_USER: postgres
