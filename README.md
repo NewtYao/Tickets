@@ -1,8 +1,10 @@
-Tickets
 Overview
-"Tickets" is a comprehensive backend project developed to manage ticketing systems. This project is designed to demonstrate the use of various backend technologies and frameworks, including Python, Docker, PostgreSQL, and MongoDB.
+---------------------------------------------------------------------------
+"Tickets" is a comprehensive backend project developed to manage ticketing systems. 
+This project is designed to demonstrate the use of various backend technologies and frameworks, including Python, Docker, PostgreSQL, and MongoDB.
 
 Features
+---------------------------------------------------------------------------
 User Authentication: Secure user login and registration.
 
 Ticket Management: Create, update, and delete tickets.
@@ -25,11 +27,13 @@ Containerization: Docker
 Version Control: Git
 
 Development Progress
+---------------------------------------------------------------------------
 Current Stage: Deployment
 
 Next Steps: Optimize the frontend
 
 Installation
+---------------------------------------------------------------------------
 Clone the repository:
 
 bash
@@ -66,4 +70,6 @@ Register a new user or log in with existing credentials.
 Manage your tickets using the provided interfaces.
 
 Contribution
-Feel free to fork this repository and contribute by submitting a pull request. For major changes, please open an issue first to discuss what you would like to change.
+---------------------------------------------------------------------------
+Feel free to fork this repository and contribute by submitting a pull request. 
+For major changes, please open an issue first to discuss what you would like to change.
