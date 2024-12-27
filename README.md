@@ -34,35 +34,46 @@ Next Steps: Optimize the frontend
 
 Installation
 ---------------------------------------------------------------------------
-Clone the repository:
+1. Clone the repository:
 
-bash
-git clone https://github.com/NewtYao/Tickets.git
-cd Tickets
-Set up the virtual environment:
+    bash
+  
+    git clone https://github.com/NewtYao/Tickets.git
+    cd Tickets
 
-bash
-python3 -m venv env
-source env/bin/activate  # On Windows use `env\Scripts\activate`
-Install the dependencies:
+2. Set up the virtual environment:
 
-bash
-pip install -r requirements.txt
-Set up the databases:
+    bash
+  
+    python3 -m venv env
+    source env/bin/activate  # On Windows use `env\Scripts\activate`
 
-Ensure PostgreSQL and MongoDB are installed and running.
+3. Install the dependencies:
 
-Create a PostgreSQL database and update the DATABASES settings in settings.py.
+    bash
+  
+    pip install -r requirements.txt
 
-Run the migrations:
+4. Set up the databases:
 
-bash
-python manage.py migrate
-Start the development server:
+    Ensure PostgreSQL and MongoDB are installed and running.
+  
+    Create a PostgreSQL database and update the DATABASES settings in settings.py.
 
-bash
-python manage.py runserver
+5. Run the migrations:
+
+    bash
+  
+    python manage.py migrate
+
+6. Start the development server:
+
+    bash
+  
+    python manage.py runserver
+  
 Usage
+---------------------------------------------------------------------------
 Navigate to http://127.0.0.1:8000/ in your web browser.
 
 Register a new user or log in with existing credentials.
